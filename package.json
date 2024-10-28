@@ -2,10 +2,9 @@
   "name": "burak",
   "version": "1.0.0",
   "main": "src/server.ts",
-  
   "scripts": {
     "start": "ts-node src/server.ts",
-    "start:dev":"nodemon --exec ts-node src/server.ts",
+    "start:dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +13,7 @@
   "license": "ISC",
   "description": "This is a project of Burak",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "moment": "^2.30.1"
   },
   "devDependencies": {
