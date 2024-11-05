@@ -1,8 +1,8 @@
 {
-  "compilerOptions": {
-  "target": "ES2020",
-  "module": "commonjs",
-  "outDir": "./dist",
+  "compilerOptions": { //bu fayldagi kodlarni productionga chiqarayotganda ishlatamiz
+  "target": "ES2020", //esma scriptda yozilgan
+  "module": "commonjs", //commonjsga compile qiberadi
+  "outDir": "./dist", //shu folderga chiqarib beradi
   "strict": true,
   "esModuleInterop": true,
   "skipLibCheck": true,
