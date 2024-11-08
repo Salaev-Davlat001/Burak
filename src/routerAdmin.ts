@@ -6,6 +6,10 @@ routerAdmin.get("/", restaurantController.goHome);
 
 routerAdmin.get("/login", restaurantController.getLogin);
 
-routerAdmin.get("/signup", restaurantController.getSignup);
+routerAdmin.post("/login", restaurantController.processLogin);
+
+routerAdmin
+.get("/signup", restaurantController.getSignup)
+.post("/signup", restaurantController.processSignup)
 
   export default routerAdmin;
