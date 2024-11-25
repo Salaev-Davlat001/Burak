@@ -5,25 +5,20 @@ import routerAdmin from "./routerAdmin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 
-
-
 /**1-ENTRANCE**/
 const app = express();
-console.log("__dirname:", __dirname)
-app.use(express.static(path.join(__dirname, "public")))  
-app.use(express.urlencoded({ extended:true })); 
-app.use(express.json()); 
-app.use(morgan(MORGAN_FORMAT))
-
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan(MORGAN_FORMAT));
 
 /**2-SESSION**/
 
-
 /**3-VIEWS**/
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "ejs")
+app.set("view engine", "ejs");
 
 /**4-ROUTERS**/
-app.use("/admin", routerAdmin); 
-app.use("/", router); 
-export default app; 
+app.use("/admin", routerAdmin);
+app.use("/", router);
+export default app;
