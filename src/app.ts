@@ -26,7 +26,7 @@ app.use(
   session({
     secret: String(process.env.SESSION_SECRET),
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 3600 * 3, // 3h
     },
     store: store,
     resave: true, //user kirgan vaqtga yana yangi vaqtni qo'shib save qilish buyrug'i
