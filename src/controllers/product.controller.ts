@@ -1,4 +1,4 @@
-import ProductService from "../models/product.service";
+import ProductService from "../models/Product.service";
 import Errors from "../libs/Errors";
 import { T } from "../libs/types/common";
 import { Request, Response } from "express";
@@ -6,7 +6,7 @@ import { Request, Response } from "express";
 const productService = new ProductService();
 const productController: T = {};
 
-productController.getAllproducts = async (_req: Request, res: Response) => {
+productController.getAllproducts = async (req: Request, res: Response) => {
   try {
     console.log("getAllProducts");
     res.render("products");
@@ -17,9 +17,10 @@ productController.getAllproducts = async (_req: Request, res: Response) => {
   }
 };
 
-productController.createNewProduct = async (_req: Request, res: Response) => {
+productController.createNewProduct = async (req: Request, res: Response) => {
   try {
     console.log("createNewProduct");
+    res.send("DONE!");
   } catch (err) {
     console.log("Error, createNewProduct:", err);
     if (err instanceof Errors) res.status(err.code).json(err);
@@ -27,10 +28,7 @@ productController.createNewProduct = async (_req: Request, res: Response) => {
   }
 };
 
-productController.updateChosenProduct = async (
-  _req: Request,
-  res: Response
-) => {
+productController.updateChosenProduct = async (req: Request, res: Response) => {
   try {
     console.log("updateChosenProduct");
   } catch (err) {
