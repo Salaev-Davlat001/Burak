@@ -25,13 +25,13 @@ app.use(morgan(MORGAN_FORMAT));
 /**2-SESSION**/
 app.use(
   session({
-    secret: String(process.env.SESSION_SECRET),
+    secret: String(process.env.SESSION_SECRET), // sessiyalarni xavfsiz qilkish uchun ishlatiladigan kalit
     cookie: {
-      maxAge: 1000 * 3600 * 3, // 3h
+      maxAge: 1000 * 3600 * 3, // 3h cookie mudati
     },
-    store: store,
+    store: store, //sessiyalarni saqlash uchun ishlatiladigan store xotirasi
     resave: true, //user kirgan vaqtga yana yangi vaqtni qo'shib save qilish buyrug'i
-    saveUninitialized: true,
+    saveUninitialized: true, //sid ni saqlash uchun
   })
 );
 

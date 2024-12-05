@@ -7,7 +7,10 @@ function getTargetImageStorage(address: any) {
     destination: function (req, file, cb) {
       cb(null, `./uploads/${address}`);
     },
+
     filename: function (req, file, cb) {
+      console.log("file => ", file);
+      console.log("path => ", path.parse(file.originalname));
       const extension = path.parse(file.originalname).ext;
       const random_name = v4() + extension;
       cb(null, random_name);
@@ -27,7 +30,7 @@ const product_storage = multer.diskStorage({
     cb(null, "./uploads/products");
   },
   filename: function (req, file, cb) {
-    console.log(file);
+    console.log("file => ", file);
     const extension = path.parse(file.originalname).ext;
     const random_name = v4() + extension;
     cb(null, random_name);
