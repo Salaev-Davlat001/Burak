@@ -47,7 +47,7 @@ restaurantController.processSignup = async (
       throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG);
 
     const newMember: MemberInput = req.body;
-    newMember.memberImage = file?.path; //neew member ning rasmi fayli ning url manziliga teng
+    newMember.memberImage = file?.path.replace(/\\/g, "/"); //neew member ning rasmi fayli ning url manziliga teng
     newMember.memberType = MemberType.RESTAURANT;
     const result = await memberService.processSignup(newMember);
     //TODO SESSION
@@ -116,16 +116,16 @@ restaurantController.checkAuthSession = async (
 };
 
 restaurantController.verifyRestaurant = (
-  _req: AdminRequest,
-  _res: Response,
+  req: AdminRequest,
+  res: Response,
   next: NextFunction
 ) => {
-  if (_req.session?.member?.memberType === MemberType.RESTAURANT) {
-    _req.member = _req.session.member;
+  if (req.session?.member?.memberType === MemberType.RESTAURANT) {
+    req.member = req.session.member;
     next();
   } else {
     const message = Message.NOT_AUTHENTICATED;
-    _res.send(
+    res.send(
       `<script> alert ("${message}"); window.location.replace('admin/login') </script>`
     );
   }
