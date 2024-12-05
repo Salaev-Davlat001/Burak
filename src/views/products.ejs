@@ -3,6 +3,9 @@
   <div>
     <div>PRODUCTS PAGE</div>
     <div><%=member.memberNick%></div>
+    <% products.map( function (value, key) { %>
+    <p><%=value.productName %> - <%=value.productSize %></p>
+    <% }) %>
   </div>
 </body>
 <%- include('includes/footer') %>
