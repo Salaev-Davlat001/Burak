@@ -60,9 +60,9 @@
                  class="spec-select new-product-status"
                  id="<%= value._id %>"
                  >
-                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : ''%>PAUSE</option>
-                  <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : ''%>>PROCESS</option>
-                  <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : ''%>>DELETE</option>
+                  <option value="PAUSE" <%= value.productStatus === 'PAUSE' ? 'selected' : '' %>>PAUSE</option>
+                  <option value="PROCESS" <%= value.productStatus === 'PROCESS' ? 'selected' : '' %>>PROCESS</option>
+                  <option value="DELETE" <%= value.productStatus === 'DELETE' ? 'selected' : '' %>>DELETE</option>
                 </select>
               </td>
             </tbody>
@@ -77,7 +77,8 @@
             </button>
           </div>
         </div>
-        <form
+        <form 
+        onsubmit="return validateForm()"
           action="/admin/product/create"
           method="POST"
           class="dish-container"
@@ -171,7 +172,8 @@
                   id="file"
                   name="productImages"
                   class="image-one"
-                  required
+                required
+                onchange="previewFileHandler(this, 1)"
                 />
               </div>
               <div class="upload-img-box">
@@ -181,6 +183,7 @@
                   id="file"
                   name="productImages"
                   class="image-two"
+                  onchange="previewFileHandler(this, 2)"
                 />
               </div>
               <div class="upload-img-box">
@@ -190,6 +193,7 @@
                   id="file"
                   name="productImages"
                   class="image-three"
+                  onchange="previewFileHandler(this, 3)"
                 />
               </div>
               <div class="upload-img-box">
@@ -199,6 +203,7 @@
                   id="file"
                   name="productImages"
                   class="image-four"
+                  onchange="previewFileHandler(this, 4)"
                 />
               </div>
               <div class="upload-img-box">
@@ -208,6 +213,7 @@
                   id="file"
                   name="productImages"
                   class="image-five"
+                  onchange="previewFileHandler(this, 5)"
                 />
               </div>
               <input name="restaurantIid" class="restaurant-id" hidden />
