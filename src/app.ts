@@ -19,6 +19,7 @@ const store = new MongoDBStore({
 /**1-ENTRANCE**/
 const app = express();
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/uploads", express.static("./uploads")); //uploads folderi tashqi olamga ochildi va buni endi hamma ko'rishi mumkin
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

@@ -17,6 +17,7 @@ class MemberService {
     this.memberModel = MemberModel;
   }
   //SPA
+
   public async signup(input: MemberInput): Promise<any> {
     const salt = await bcrypt.genSalt();
     input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -53,7 +54,6 @@ class MemberService {
     if (!isMatch) {
       throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD);
     }
-
     return await this.memberModel.findById(member._id).lean().exec();
   }
 
@@ -64,6 +64,18 @@ class MemberService {
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
+    return result;
+  }
+
+  public async updateMember(
+    member: Member,
+    input: MemberUpdateInput
+  ): Promise<any> {
+    const memberId = shapeintroMongooseObjectId(member._id);
+    const result = await this.memberModel
+      .findOneAndUpdate({ _id: memberId }, input, { new: true })
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
     return result;
   }
   //SSR
