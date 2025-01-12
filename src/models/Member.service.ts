@@ -78,6 +78,19 @@ class MemberService {
     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
     return result;
   }
+
+  public async getTopUsers(): Promise<any[]> {
+    const result = await this.memberModel
+      .find({
+        memberStatus: MemberStatus.ACTIVE,
+        memberPoints: { $gte: 1 },
+      })
+      .sort({ memberPoints: -1 }) //kamayish tartibida saralaydi
+      .limit(4)
+      .exec(); //4ta user berishini so'rayapmiz // Active User bo'limida ish-di
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
+  }
   //SSR
 
   public async processSignup(input: MemberInput): Promise<any> {
