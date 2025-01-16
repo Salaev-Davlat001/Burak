@@ -11,6 +11,7 @@ import { Message } from "../libs/Errors";
 import { shapeintroMongooseObjectId } from "../libs/config";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { T } from "../libs/types/common";
+import { ObjectId } from "mongoose";
 
 class ProductService {
   private readonly productModel;
@@ -32,8 +33,8 @@ class ProductService {
 
     const sort: T =
       inquiry.order === "productPrice"
-        ? { [inquiry.order]: 1 }
-        : { [inquiry.order]: -1 };
+        ? { [inquiry.order]: 1 } //eng arzon productlardan
+        : { [inquiry.order]: -1 }; // aks holda eng qimmatidan
 
     const result = await this.productModel
       .aggregate([
@@ -42,6 +43,20 @@ class ProductService {
         { $skip: (inquiry.page * 1 - 1) * inquiry.limit },
         { $limit: inquiry.limit * 1 },
       ])
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+    return result;
+  }
+
+  public async getProduct(memberId: ObjectId | null, id: string): Promise<any> {
+    const productId = shapeintroMongooseObjectId(id);
+
+    let result = await this.productModel
+      .findOne({
+        _id: productId,
+        productStatus: ProductStatus.PROCESS,
+      })
       .exec();
     if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
 
