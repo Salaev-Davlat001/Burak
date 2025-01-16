@@ -6,7 +6,7 @@ const viewSchema = new Schema(
     ViewGroup: {
       type: String,
       enum: ViewGroup,
-      required: true,
+      //required: true,
     },
 
     memberId: {
