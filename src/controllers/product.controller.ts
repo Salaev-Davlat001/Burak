@@ -37,7 +37,7 @@ productController.getProducts = async (req: Request, res: Response) => {
 productController.getProduct = async (req: ExtendedRequest, res: Response) => {
   try {
     console.log("getProduct");
-    const { id } = req.params;
+    const { id } = req.params; //distruction usulida,yani bir nechta qiymatlarni birdaniga qabul qilish mumkin
     const memberId = req.member?._id ?? null,
       result = await productService.getProduct(memberId, id);
     res.status(HttpCode.OK).json(result);
