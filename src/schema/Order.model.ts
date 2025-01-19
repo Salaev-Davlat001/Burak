@@ -14,8 +14,7 @@ const orderSchema = new Schema(
     },
 
     orderStatus: {
-      type: Number,
-      required: true,
+      type: String,
       enum: OrderStatus,
       default: OrderStatus.PAUSE,
     },

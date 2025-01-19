@@ -8,7 +8,7 @@ import {
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs";
-import { shapeintroMongooseObjectId } from "../libs/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class MemberService {
   private readonly memberModel;
@@ -67,7 +67,7 @@ class MemberService {
   }
 
   public async getMemberDetail(member: Member): Promise<any> {
-    const memberId = shapeintroMongooseObjectId(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const result = await this.memberModel
       .findOne({ _id: memberId, memberStatus: MemberStatus.ACTIVE })
       .exec();
@@ -80,7 +80,7 @@ class MemberService {
     member: Member,
     input: MemberUpdateInput
   ): Promise<any> {
-    const memberId = shapeintroMongooseObjectId(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const result = await this.memberModel
       .findOneAndUpdate({ _id: memberId }, input, { new: true })
       .exec();
@@ -150,7 +150,7 @@ class MemberService {
   }
 
   public async updateChosenUser(input: MemberUpdateInput): Promise<any> {
-    input._id = shapeintroMongooseObjectId(input._id);
+    input._id = shapeIntoMongooseObjectId(input._id);
     const result = await this.memberModel
       .findByIdAndUpdate({ _id: input._id }, input, { new: true })
       .exec();

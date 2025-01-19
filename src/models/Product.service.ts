@@ -8,7 +8,7 @@ import ProductModel from "../schema/Product.model";
 import Errors from "../libs/Errors";
 import { HttpCode } from "../libs/Errors";
 import { Message } from "../libs/Errors";
-import { shapeintroMongooseObjectId } from "../libs/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { T } from "../libs/types/common";
 import { ObjectId } from "mongoose";
@@ -55,7 +55,7 @@ class ProductService {
   }
 
   public async getProduct(memberId: ObjectId | null, id: string): Promise<any> {
-    const productId = shapeintroMongooseObjectId(id);
+    const productId = shapeIntoMongooseObjectId(id);
 
     let result = await this.productModel
       .findOne({
@@ -112,7 +112,7 @@ class ProductService {
     id: string,
     input: ProductUpdateInput
   ): Promise<any> {
-    id = shapeintroMongooseObjectId(id);
+    id = shapeIntoMongooseObjectId(id);
     const result = await this.productModel
       .findOneAndUpdate({ _id: id }, input, { new: true })
       .exec();
