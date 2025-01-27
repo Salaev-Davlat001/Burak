@@ -5,6 +5,7 @@ import routerAdmin from "./routerAdmin";
 import morgan from "morgan";
 import { MORGAN_FORMAT } from "./libs/config";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static("./uploads")); //uploads folderi tashqi olamga ochildi va buni endi hamma ko'rishi mumkin
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors({ credentials: true, origin: true }));
 app.use(cookieParser());
 app.use(morgan(MORGAN_FORMAT));
 
